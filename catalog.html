@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Каталог — TechOpt</title>
+  <meta name="description" content="Оптовый каталог электроники. Смартфоны, ноутбуки, планшеты, аксессуары с оптовыми ценами."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23DC2626'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='20' fill='white'>T</text></svg>"/>
+  <meta property="og:title" content="Каталог — TechOpt"/>
+  <meta property="og:description" content="Оптовый каталог электроники. Смартфоны, ноутбуки, планшеты, аксессуары с оптовыми ценами."/>
+  <meta property="og:type" content="website"/>
+  <style>
+    body { padding-top: 60px; }
+
+    /* ── PAGE HEADER ─────────────────────── */
+    .page-head {
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0 48px;
+    }
+
+    .page-head-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--t3);
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb a { color: var(--t3); transition: color .2s; }
+    .breadcrumb a:hover { color: var(--red); }
+    .breadcrumb span { color: var(--t4); }
+
+    .page-title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .page-title em { font-style: normal; color: var(--red); }
+
+    .page-head-right { text-align: right; }
+
+    .page-head-count {
+      font-size: 13px;
+      color: var(--t3);
+    }
+
+    .page-head-count strong {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -1px;
+      display: block;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* ── LAYOUT ─────────────────────────── */
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* ── SIDEBAR ────────────────────────── */
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 36px 32px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+    .sidebar-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 12px;
+      margin-top: 24px;
+    }
+
+    .sidebar-label:first-child { margin-top: 0; }
+
+    .sidebar-search {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-search svg {
+      position: absolute;
+      left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--t3);
+      width: 14px; height: 14px;
+      pointer-events: none;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      color: var(--t1);
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 8px 10px 8px 32px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .sidebar-search input::placeholder { color: var(--t3); }
+    .sidebar-search input:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-dim); }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background .15s;
+      font-size: 13px;
+      color: var(--t1);
+      user-select: none;
+      border: 1px solid transparent;
+    }
+
+    .filter-option:hover { background: var(--surface); }
+
+    .filter-option.active {
+      background: var(--red-dim);
+      border-color: rgba(220,38,38,.15);
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .filter-option-count {
+      font-size: 11px;
+      color: var(--t3);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 1px 6px;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .filter-option.active .filter-option-count {
+      background: rgba(220,38,38,.12);
+      color: var(--red);
+    }
+
+    .reset-btn {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--red);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      padding: 6px 0;
+      display: none;
+    }
+
+    .reset-btn.visible { display: block; }
+
+    /* ── CONTENT ────────────────────────── */
+    .catalog-content { padding: 36px 40px; }
+
+    /* ── TOOLBAR ────────────────────────── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sort-select {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--t1);
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 7px 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .active-filter-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(220,38,38,.15);
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
+    .active-filter-tag button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 0 0 2px;
+    }
+
+    .results-info { font-size: 13px; color: var(--t3); white-space: nowrap; }
+    .results-info strong { color: var(--t1); }
+
+    /* ── GRID ───────────────────────────── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .avail-in    { background: var(--green-dim); color: var(--green); }
+    .avail-order { background: var(--yellow-dim); color: var(--yellow); }
+
+    /* BigGeek-style product card */
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+      position: relative;
+    }
+
+    .product-card:hover {
+      border-color: rgba(10,10,10,.18);
+      box-shadow: 0 8px 32px rgba(0,0,0,.09);
+      transform: translateY(-3px);
+    }
+
+    /* image/icon area */
+    .card-photo {
+      background: var(--surface);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-photo-icon {
+      width: 72%;
+      height: 72%;
+      object-fit: contain;
+      transition: transform .4s var(--ease);
+      user-select: none;
+      mix-blend-mode: multiply;
+    }
+
+    .product-card:hover .card-photo-icon {
+      transform: scale(1.08);
+    }
+
+    .card-avail {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 100px;
+    }
+
+    /* body */
+    .card-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 4px;
+    }
+
+    .card-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      letter-spacing: -.2px;
+      margin-bottom: 6px;
+      transition: color .2s;
+    }
+
+    .product-card:hover .card-name { color: var(--red); }
+
+    .card-sku {
+      font-size: 10.5px;
+      font-family: 'Courier New', monospace;
+      color: var(--t3);
+      margin-bottom: 10px;
+    }
+
+    .card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border2);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -.5px;
+      line-height: 1;
+      transition: color .2s;
+    }
+
+    .product-card:hover .card-price { color: var(--red); }
+
+    .card-from {
+      font-size: 10.5px;
+      color: var(--t3);
+      margin-top: 3px;
+    }
+
+    .card-arrow {
+      width: 34px; height: 34px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: background .2s, border-color .2s, transform .25s var(--ease);
+      color: var(--t2);
+    }
+
+    .product-card:hover .card-arrow {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      transform: translateX(2px);
+    }
+
+    /* empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .empty-state h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .empty-state p { font-size: 14px; color: var(--t2); }
+
+    @media (max-width: 1000px) {
+      .catalog-layout { grid-template-columns: 200px 1fr; }
+      .catalog-content { padding: 28px 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .catalog-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+      .sidebar-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+      .sidebar-label { display: none; }
+      .filter-option { border: 1px solid var(--border); }
+      .catalog-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="TechOpt" class="logo-img"/>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="index.html#order">Условия</a>
+      <a href="index.html#order" class="header-cta btn">Оставить заявку</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+  <nav class="nav-overlay-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html" class="active">Каталог</a>
+    <a href="index.html#order">Условия</a>
+    <a href="index.html#order" class="header-cta btn">Оставить заявку</a>
+  </nav>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <span>›</span>
+      <span>Каталог</span>
+    </div>
+    <div class="page-head-inner">
+      <h1 class="page-title">Весь каталог<br/><em>электроники</em></h1>
+      <div class="page-head-right">
+        <div class="page-head-count">
+          <strong id="totalCount">24</strong>
+          позиции в каталоге
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<div class="catalog-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Поиск</div>
+    <div class="sidebar-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Артикул или название…"/>
+    </div>
+
+    <div class="sidebar-label" style="margin-top:20px">Категория</div>
+    <div id="catFilters" class="sidebar-filters">
+      <div class="filter-option active" data-cat="all">
+        <span>Все товары</span>
+        <span class="filter-option-count" data-cat-count="all">24</span>
+      </div>
+      <div class="filter-option" data-cat="smartphones">
+        <span>Смартфоны</span>
+        <span class="filter-option-count" data-cat-count="smartphones">8</span>
+      </div>
+      <div class="filter-option" data-cat="laptops">
+        <span>Ноутбуки</span>
+        <span class="filter-option-count" data-cat-count="laptops">6</span>
+      </div>
+      <div class="filter-option" data-cat="tablets">
+        <span>Планшеты</span>
+        <span class="filter-option-count" data-cat-count="tablets">5</span>
+      </div>
+      <div class="filter-option" data-cat="accessories">
+        <span>Аксессуары</span>
+        <span class="filter-option-count" data-cat-count="accessories">5</span>
+      </div>
+    </div>
+
+    <div class="sidebar-label" style="margin-top:20px">Наличие</div>
+    <div id="availFilters" class="sidebar-filters">
+      <div class="filter-option active" data-avail="all">
+        <span>Все</span>
+      </div>
+      <div class="filter-option" data-avail="in">
+        <span>В наличии</span>
+      </div>
+      <div class="filter-option" data-avail="order">
+        <span>Под заказ</span>
+      </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn" onclick="resetFilters()">✕ Сбросить фильтры</button>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="catalog-content">
+    <div class="toolbar">
+      <div class="toolbar-left" id="activeTags"></div>
+      <div class="results-info">
+        Найдено: <strong id="resultsCount">24</strong>
+      </div>
+    </div>
+    <div class="products-grid" id="grid"></div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-copy"><img src="img/logo.png" alt="TechOpt" style="height:24px;border-radius:5px;vertical-align:middle;margin-right:8px;"/> — демонстрационный сайт.</div>
+    <div class="footer-by">Разработано <a href="https://bio33.agency" target="_blank">Bio33 Agency</a></div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Наверх">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <span>Мы используем файлы cookie для улучшения работы сайта. <a href="privacy.html" class="cookie-link">Подробнее</a></span>
+  <div class="cookie-actions">
+    <button class="btn btn-red btn-sm" onclick="acceptCookies()">Принять</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+let activeCat = 'all', activeAvail = 'all';
+
+// Read URL params
+const params = new URLSearchParams(location.search);
+if (params.get('cat')) activeCat = params.get('cat');
+
+function filtered() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  return PRODUCTS.filter(p => {
+    const cok = activeCat === 'all' || p.cat === activeCat;
+    const aok = activeAvail === 'all' || p.avail === activeAvail;
+    const sok = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q);
+    return cok && aok && sok;
+  });
+}
+
+function catLabel(c) {
+  const map = { smartphones:'Смартфоны', laptops:'Ноутбуки', tablets:'Планшеты', accessories:'Аксессуары' };
+  return map[c] || c;
+}
+
+function renderActiveTags() {
+  const el = document.getElementById('activeTags');
+  const tags = [];
+  if (activeCat !== 'all') tags.push({ id:'cat', label: catLabel(activeCat) });
+  if (activeAvail !== 'all') tags.push({ id:'avail', label: activeAvail === 'in' ? 'В наличии' : 'Под заказ' });
+  el.innerHTML = tags.map(t => `
+    <span class="active-filter-tag">
+      ${t.label}
+      <button onclick="removeTag('${t.id}')">×</button>
+    </span>
+  `).join('');
+}
+
+function removeTag(id) {
+  if (id === 'cat') activeCat = 'all';
+  if (id === 'avail') activeAvail = 'all';
+  syncFiltersUI(); render();
+}
+
+function resetFilters() {
+  activeCat = 'all'; activeAvail = 'all';
+  document.getElementById('searchInput').value = '';
+  syncFiltersUI(); render();
+}
+
+function syncFiltersUI() {
+  document.querySelectorAll('[data-cat]').forEach(el => el.classList.toggle('active', el.dataset.cat === activeCat));
+  document.querySelectorAll('[data-avail]').forEach(el => el.classList.toggle('active', el.dataset.avail === activeAvail));
+  const dirty = activeCat !== 'all' || activeAvail !== 'all' || document.getElementById('searchInput').value;
+  document.getElementById('resetBtn').classList.toggle('visible', !!dirty);
+  renderActiveTags();
+}
+
+function render() {
+  const items = filtered();
+  document.getElementById('resultsCount').textContent = items.length;
+  document.getElementById('totalCount').textContent = PRODUCTS.length;
+
+  const grid = document.getElementById('grid');
+  if (!items.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить параметры фильтрации или <button onclick="resetFilters()" style="background:none;border:none;color:var(--red);cursor:pointer;font-family:inherit;font-size:inherit;font-weight:600">сбросить фильтры</button></p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map(p => `
+    <a href="product.html?id=${p.id}" class="product-card">
+      <div class="card-photo">
+        <img class="card-photo-icon" src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy"/>
+        <span class="card-avail ${p.avail === 'in' ? 'avail-in' : 'avail-order'}">${p.avail === 'in' ? 'В наличии' : 'Под заказ'}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-sku">${p.sku}</div>
+        ${p.tags?.length ? `<div class="card-tags">${p.tags.slice(0,2).map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+        <div class="card-footer">
+          <div>
+            <div class="card-price">₽ ${p.price}</div>
+            <div class="card-from">${p.from}</div>
+          </div>
+          <div class="card-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </a>
+  `).join('');
+}
+
+// Cat filter clicks
+document.getElementById('catFilters').addEventListener('click', e => {
+  const el = e.target.closest('[data-cat]');
+  if (!el) return;
+  activeCat = el.dataset.cat;
+  syncFiltersUI(); render();
+});
+
+// Avail filter clicks
+document.getElementById('availFilters').addEventListener('click', e => {
+  const el = e.target.closest('[data-avail]');
+  if (!el) return;
+  activeAvail = el.dataset.avail;
+  syncFiltersUI(); render();
+});
+
+document.getElementById('searchInput').addEventListener('input', () => { syncFiltersUI(); render(); });
+
+// Init
+syncFiltersUI();
+render();
+</script>
+</body>
+</html>

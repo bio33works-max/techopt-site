@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechOpt — Оптовые поставки электроники</title>
+  <meta name="description" content="Оптовый каталог электроники: смартфоны, ноутбуки, планшеты, аксессуары. Прямые поставки для юридических лиц."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23DC2626'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='20' fill='white'>T</text></svg>"/>
+  <meta property="og:title" content="TechOpt — Оптовые поставки электроники"/>
+  <meta property="og:description" content="Оптовый каталог электроники: смартфоны, ноутбуки, планшеты, аксессуары. Прямые поставки для юридических лиц."/>
+  <meta property="og:type" content="website"/>
+  <style>
+    /* ── PAGE SHELL ─────────────────────── */
+    body { padding-top: 60px; }
+
+    /* ── HERO ───────────────────────────── */
+    .hero {
+      min-height: calc(100svh - 60px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      padding: 72px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -180px; right: -120px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(220,38,38,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    /* 2-column grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+
+    .hero-h1 {
+      font-size: clamp(44px, 5.5vw, 80px);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -2.5px;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--t2);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--t3);
+      margin-left: 4px;
+    }
+
+    /* RIGHT — product showcase */
+    .hero-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+    }
+
+    .hero-showcase::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle at 60% 50%, rgba(220,38,38,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hs-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hs-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,.1);
+      border-color: rgba(10,10,10,.18);
+    }
+
+    .hs-card:nth-child(2) { margin-top: 24px; }
+    .hs-card:nth-child(4) { margin-top: -24px; }
+
+    .hs-photo {
+      background: var(--surface);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hs-photo img {
+      width: 78%; height: 78%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transition: transform .4s var(--ease);
+    }
+
+    .hs-card:hover .hs-photo img { transform: scale(1.08); }
+
+    .hs-body { padding: 12px 14px 14px; }
+
+    .hs-brand {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 2px;
+    }
+
+    .hs-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .hs-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: -.3px;
+    }
+
+    /* stats row */
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding-right: 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+    .stat-item:not(:first-child):not(:last-child) { padding-left: 40px; }
+
+    .stat-num {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .stat-num span { color: var(--red); }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--t3);
+      margin-top: 4px;
+    }
+
+    /* ── FEATURED PRODUCTS ──────────────── */
+    .featured-section {
+      padding: 80px 0 0;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .featured-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .featured-track-wrap {
+      padding-bottom: 48px;
+      position: relative;
+    }
+
+    .featured-track {
+      display: flex;
+      gap: 16px;
+      padding: 0 40px 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .featured-track::-webkit-scrollbar { display: none; }
+
+    .feat-card {
+      min-width: 220px;
+      max-width: 220px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+    }
+
+    .feat-card:hover {
+      border-color: rgba(10,10,10,.18);
+      box-shadow: 0 8px 32px rgba(0,0,0,.09);
+      transform: translateY(-3px);
+    }
+
+    .feat-card-photo {
+      background: var(--surface);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .feat-card-icon {
+      width: 75%;
+      height: 75%;
+      object-fit: contain;
+      transition: transform .4s var(--ease);
+      mix-blend-mode: multiply;
+    }
+
+    .feat-card:hover .feat-card-icon {
+      transform: scale(1.08);
+    }
+
+    .feat-card-body {
+      padding: 14px 16px 16px;
+    }
+
+    .feat-card-brand {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 3px;
+    }
+
+    .feat-card-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+
+    .feat-card:hover .feat-card-name { color: var(--red); }
+
+    .feat-card-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -.5px;
+      transition: color .2s;
+    }
+
+    .feat-card:hover .feat-card-price { color: var(--red); }
+
+    .feat-card-from {
+      font-size: 10px;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    /* ── CATEGORIES ─────────────────────── */
+    .cats-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--black);
+      line-height: 1.05;
+      margin-bottom: 56px;
+    }
+
+    .cats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .cat-card {
+      background: var(--white);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      text-decoration: none;
+      transition: background .25s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+
+    .cat-card:hover { background: #F7F7F6; }
+    .cat-card:hover::after { transform: scaleX(1); }
+
+    .cat-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      font-size: 26px;
+    }
+
+    .cat-icon-sm { background: var(--red-dim); color: var(--red); }
+    .cat-icon-nl { background: var(--blue-dim); color: var(--blue); }
+    .cat-icon-pl { background: rgba(124,58,237,.07); color: #7C3AED; }
+    .cat-icon-ac { background: rgba(5,150,105,.08); color: #059669; }
+
+    .cat-name {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -.4px;
+      margin-bottom: 8px;
+    }
+
+    .cat-desc {
+      font-size: 13.5px;
+      color: var(--t2);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+
+    .cat-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--red);
+    }
+
+    .cat-link svg { transition: transform .25s var(--ease); }
+    .cat-card:hover .cat-link svg { transform: translateX(4px); }
+
+    /* ── WHY US ─────────────────────────── */
+    .why-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-items { display: flex; flex-direction: column; gap: 0; }
+
+    .why-item {
+      display: flex;
+      gap: 20px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-item:first-child { padding-top: 0; border-top: 1px solid var(--border); }
+
+    .why-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .5px;
+      min-width: 28px;
+      padding-top: 2px;
+    }
+
+    .why-content-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+    }
+
+    .why-content-text { font-size: 13.5px; color: var(--t2); line-height: 1.55; }
+
+    .why-visual {
+      background: var(--black);
+      border-radius: 20px;
+      padding: 48px 40px;
+      color: #fff;
+    }
+
+    .why-visual-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .why-visual-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 36px;
+    }
+
+    .why-visual-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wv-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .wv-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .wv-row-text { font-size: 13px; color: rgba(255,255,255,.75); flex: 1; }
+    .wv-row-val  { font-size: 13px; font-weight: 700; color: #fff; }
+
+    /* ── FORM CTA ────────────────────────── */
+    .cta-section {
+      padding: 100px 0;
+      background: var(--black);
+      color: #fff;
+    }
+
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-inner .badge-red {
+      background: rgba(220,38,38,.2);
+      border-color: rgba(220,38,38,.35);
+      color: #f87171;
+      margin-bottom: 24px;
+    }
+
+    .cta-h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .cta-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 48px;
+    }
+
+    .cta-form { text-align: left; }
+
+    .cta-form .field label { color: rgba(255,255,255,.4); }
+
+    .cta-form .field input,
+    .cta-form .field textarea {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.12);
+      color: #fff;
+    }
+
+    .cta-form .field input::placeholder,
+    .cta-form .field textarea::placeholder { color: rgba(255,255,255,.25); }
+
+    .cta-form .field input:focus,
+    .cta-form .field textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,.2);
+    }
+
+    .cta-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cta-note { font-size: 12px; color: rgba(255,255,255,.25); }
+
+    @media (max-width: 1100px) {
+      .hero-grid { gap: 32px; }
+      .hero-h1 { font-size: clamp(40px, 5vw, 64px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero { padding: 56px 0 48px; }
+      .hero-wrap { padding: 0 20px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-showcase { display: none; }
+      .hero-h1 { letter-spacing: -1.5px; }
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 20px !important; }
+      .stat-item:last-child { border-bottom: none; padding-bottom: 0 !important; }
+      .featured-section { padding: 60px 0 0; }
+      .featured-track { padding: 0 20px 16px; }
+      .featured-header { padding: 0 20px; }
+      .cats-section, .why-section, .cta-section { padding: 64px 0; }
+      .cats-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 540px) {
+      .cats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ═════════════════════════════════════════════════ -->
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="TechOpt" class="logo-img"/>
+    </a>
+
+    <nav class="header-nav">
+      <a href="index.html" class="active">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="#order">Условия</a>
+      <a href="#order" class="header-cta btn">Оставить заявку</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+  <nav class="nav-overlay-links">
+    <a href="index.html" class="active">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="#order">Условия</a>
+    <a href="#order" class="header-cta btn">Оставить заявку</a>
+  </nav>
+</div>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-wrap">
+    <div class="hero-grid">
+
+      <!-- LEFT: text -->
+      <div>
+        <div class="hero-eyebrow reveal">
+          <span class="hero-eyebrow-dot"></span>
+          Оптовые поставки электроники
+        </div>
+
+        <h1 class="hero-h1 reveal" style="transition-delay:.08s">
+          Техника<br/>для вашего<br/>
+          <em>бизнеса</em>
+        </h1>
+
+        <p class="hero-sub reveal" style="transition-delay:.16s">
+          Смартфоны, ноутбуки, планшеты и аксессуары —
+          прямые поставки от дистрибьюторов. Работаем
+          с юридическими лицами от 3 единиц.
+        </p>
+
+        <div class="hero-actions reveal" style="transition-delay:.22s">
+          <a href="catalog.html" class="btn btn-red">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            Открыть каталог
+          </a>
+          <a href="#order" class="btn btn-outline">Запросить КП</a>
+          <span class="hero-note">Ответ в&nbsp;течение&nbsp;2&nbsp;ч</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: product showcase (rendered by JS) -->
+      <div class="hero-showcase reveal" style="transition-delay:.18s" id="heroShowcase"></div>
+
+    </div><!-- /hero-grid -->
+
+    <div class="hero-stats reveal" style="transition-delay:.3s">
+      <div class="stat-item">
+        <div class="stat-num">1<span>,</span>200<span>+</span></div>
+        <div class="stat-label">Позиций в каталоге</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">48<span>ч</span></div>
+        <div class="stat-label">Среднее время обработки</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">от&nbsp;3</div>
+        <div class="stat-label">Минимальный заказ, шт</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Лет на рынке</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURED PRODUCTS ══════════════════════════════════════ -->
+<section class="featured-section">
+  <div class="wrap">
+    <div class="featured-header reveal">
+      <div>
+        <div class="section-label">Популярные позиции</div>
+        <div class="section-title" style="margin-bottom:0">Топ каталога</div>
+      </div>
+      <a href="catalog.html" class="btn btn-outline btn-sm" style="flex-shrink:0">
+        Весь каталог
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="featured-track-wrap">
+    <div class="featured-track" id="featuredTrack">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORIES ════════════════════════════════════════════ -->
+<section class="cats-section">
+  <div class="wrap">
+    <div class="section-label reveal">Каталог</div>
+    <div class="section-title reveal" style="transition-delay:.06s">Все категории товаров</div>
+
+    <div class="cats-grid reveal" style="transition-delay:.12s">
+      <a href="catalog.html?cat=smartphones" class="cat-card">
+        <div class="cat-icon cat-icon-sm">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="cat-name">Смартфоны</div>
+        <div class="cat-desc">Apple, Samsung, Xiaomi, OPPO и другие бренды. Флагманы и среднебюджетные модели.</div>
+        <span class="cat-link">
+          Смотреть
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="catalog.html?cat=laptops" class="cat-card">
+        <div class="cat-icon cat-icon-nl">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="cat-name">Ноутбуки</div>
+        <div class="cat-desc">MacBook, ThinkPad, ROG, XPS и HP Spectre. Для бизнеса, профессионального использования и игр.</div>
+        <span class="cat-link">
+          Смотреть
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="catalog.html?cat=tablets" class="cat-card">
+        <div class="cat-icon cat-icon-pl">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="cat-name">Планшеты</div>
+        <div class="cat-desc">iPad Pro, Air, Samsung Galaxy Tab и Xiaomi Pad. Для работы, контента и образования.</div>
+        <span class="cat-link">
+          Смотреть
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="catalog.html?cat=accessories" class="cat-card">
+        <div class="cat-icon cat-icon-ac">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <div class="cat-name">Аксессуары</div>
+        <div class="cat-desc">AirPods, Galaxy Buds, Apple Watch, мониторы и павербанки Anker оптом.</div>
+        <span class="cat-link">
+          Смотреть
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY US ════════════════════════════════════════════════ -->
+<section class="why-section">
+  <div class="wrap">
+    <div class="why-grid">
+      <div>
+        <div class="section-label reveal">Почему TechOpt</div>
+        <div class="section-title reveal" style="transition-delay:.06s">Работаем<br/>как партнёры</div>
+        <div class="why-items reveal" style="transition-delay:.12s">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div>
+              <div class="why-content-title">Прямые контракты</div>
+              <div class="why-content-text">Работаем напрямую с официальными дистрибьюторами Apple, Samsung и Xiaomi в России. Гарантируем подлинность и официальную гарантию.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div>
+              <div class="why-content-title">Фиксированные цены</div>
+              <div class="why-content-text">Оптовые прайсы обновляются еженедельно. Долгосрочные партнёры получают персональные условия и скидки от объёма.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div>
+              <div class="why-content-title">Юридическое оформление</div>
+              <div class="why-content-text">Работаем по договору поставки с НДС. Все необходимые документы: счёт, УПД, товарная накладная, сертификаты.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <div>
+              <div class="why-content-title">Доставка по России</div>
+              <div class="why-content-text">Отправка со склада в Москве. Доставка в любой регион России, страхование груза включено в стоимость.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-visual reveal" style="transition-delay:.18s">
+        <div class="why-visual-title">Условия поставки</div>
+        <div class="why-visual-sub">Актуально на апрель 2026</div>
+        <div class="why-visual-list">
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#DC2626"></div>
+            <div class="wv-row-text">Минимальный заказ</div>
+            <div class="wv-row-val">от 3 шт</div>
+          </div>
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#2563EB"></div>
+            <div class="wv-row-text">Оплата</div>
+            <div class="wv-row-val">100% предоплата</div>
+          </div>
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#16A34A"></div>
+            <div class="wv-row-text">Отгрузка</div>
+            <div class="wv-row-val">1–3 рабочих дня</div>
+          </div>
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#CA8A04"></div>
+            <div class="wv-row-text">Гарантия</div>
+            <div class="wv-row-val">Официальная</div>
+          </div>
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#7C3AED"></div>
+            <div class="wv-row-text">Документы</div>
+            <div class="wv-row-val">Полный пакет с НДС</div>
+          </div>
+          <div class="wv-row">
+            <div class="wv-dot" style="background:#0891B2"></div>
+            <div class="wv-row-text">Менеджер</div>
+            <div class="wv-row-val">Персональный</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FORM ═══════════════════════════════════════════════ -->
+<section class="cta-section" id="order">
+  <div class="wrap">
+    <div class="cta-inner">
+      <span class="badge badge-red reveal">Заявка на поставку</span>
+      <h2 class="cta-h2 reveal" style="transition-delay:.06s">Получить<br/>коммерческое<br/>предложение</h2>
+      <p class="cta-sub reveal" style="transition-delay:.12s">Заполните форму — менеджер свяжется в течение 2 часов и подготовит персональный прайс</p>
+
+      <form class="cta-form reveal" id="orderForm" style="transition-delay:.18s">
+        <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off"/>
+        <div class="form-row" style="margin-bottom:14px">
+          <div class="field">
+            <label>Компания</label>
+            <input type="text" id="company" placeholder="ООО Ваша Компания" required/>
+          </div>
+          <div class="field">
+            <label>Контактное лицо</label>
+            <input type="text" id="name" placeholder="Иван Иванов" required/>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:14px">
+          <label>Телефон</label>
+          <input type="tel" id="phone" placeholder="+7 (900) 000-00-00" required/>
+        </div>
+        <div class="field" style="margin-bottom:20px">
+          <label>Комментарий</label>
+          <textarea id="comment" placeholder="Интересующие товары, количество, сроки..."></textarea>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+        <div style="margin-bottom:16px">
+          <label class="privacy-check">
+            <input type="checkbox" required/>
+            Согласен с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
+          </label>
+        </div>
+        <div class="cta-footer">
+          <span class="cta-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</span>
+          <button type="submit" class="btn btn-red" id="submitBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            Отправить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-copy"><img src="img/logo.png" alt="TechOpt" style="height:24px;border-radius:5px;vertical-align:middle;margin-right:8px;"/> — демонстрационный сайт. Все цены и условия носят информационный характер.</div>
+    <div class="footer-by">Разработано <a href="https://bio33.agency" target="_blank">Bio33 Agency</a></div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <span>Мы используем файлы cookie для улучшения работы сайта.</span>
+  <div class="cookie-actions">
+    <a href="privacy.html" class="cookie-link">Подробнее</a>
+    <button class="btn btn-red btn-sm" onclick="acceptCookies()">Принять</button>
+  </div>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Наверх">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script>
+// Scroll header
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// Reveal on scroll
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Hero showcase — 4 top products in 2×2 staggered grid
+(function() {
+  const picks = [
+    PRODUCTS.find(p => p.cat === 'smartphones' && p.id === 1),
+    PRODUCTS.find(p => p.cat === 'laptops'     && p.id === 9),
+    PRODUCTS.find(p => p.cat === 'tablets'     && p.id === 15),
+    PRODUCTS.find(p => p.cat === 'accessories' && p.id === 20),
+  ].filter(Boolean);
+
+  document.getElementById('heroShowcase').innerHTML = picks.map(p => `
+    <a href="product.html?id=${p.id}" class="hs-card">
+      <div class="hs-photo">
+        <img src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy"/>
+      </div>
+      <div class="hs-body">
+        <div class="hs-brand">${p.brand}</div>
+        <div class="hs-name">${p.name}</div>
+        <div class="hs-price">₽ ${p.price}</div>
+      </div>
+    </a>
+  `).join('');
+})();
+
+// Featured products
+(function() {
+  const catIcons = { smartphones:'📱', laptops:'💻', tablets:'📲', accessories:'🎧' };
+  // Pick 2 from each category for variety
+  const featured = ['smartphones','laptops','tablets','accessories']
+    .flatMap(cat => PRODUCTS.filter(p => p.cat === cat).slice(0, 2));
+
+  document.getElementById('featuredTrack').innerHTML = featured.map(p => `
+    <a href="product.html?id=${p.id}" class="feat-card">
+      <div class="feat-card-photo">
+        <img class="feat-card-icon" src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy"/>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-brand">${p.brand}</div>
+        <div class="feat-card-name">${p.name}</div>
+        <div class="feat-card-price">₽ ${p.price}</div>
+        <div class="feat-card-from">${p.from}</div>
+      </div>
+    </a>
+  `).join('');
+
+  // Drag-to-scroll
+  const track = document.getElementById('featuredTrack');
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => {
+    isDown = true; track.style.cursor = 'grabbing';
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = ''; });
+  track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = ''; });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+})();
+
+// Form submit
+document.getElementById('orderForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('formStatus');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+  try {
+    const res = await fetch('/api/send-telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company: document.getElementById('company').value,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        comment: document.getElementById('comment').value,
+        source: 'index',
+        _hp: ''
+      })
+    });
+    if (res.ok) {
+      status.className = 'form-status ok';
+      status.textContent = '✓ Заявка отправлена! Свяжемся в течение 2 часов.';
+      document.getElementById('orderForm').reset();
+    } else throw new Error();
+  } catch {
+    status.className = 'form-status err';
+    status.textContent = '✗ Ошибка отправки. Позвоните нам напрямую.';
+    btn.disabled = false; btn.textContent = 'Отправить';
+  }
+});
+</script>
+</body>
+</html>

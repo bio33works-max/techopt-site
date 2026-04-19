@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="pageTitle">Товар — TechOpt</title>
+  <meta name="description" id="pageDesc" content="Оптовые поставки электроники — TechOpt"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <style>
+    body { padding-top: 60px; }
+
+    /* ── PAGE HEADER ─────────────────────── */
+    .product-head {
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0 48px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--t3);
+      margin-bottom: 32px;
+    }
+    .breadcrumb a { color: var(--t3); transition: color .2s; }
+    .breadcrumb a:hover { color: var(--red); }
+    .breadcrumb span { color: var(--t4); }
+
+    .product-head-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* LEFT: visual */
+    .product-visual {
+      position: sticky;
+      top: 80px;
+    }
+
+    .product-visual-box {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-visual-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 40%, rgba(220,38,38,.06) 0%, transparent 65%);
+    }
+
+    .product-cat-icon {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      mix-blend-mode: multiply;
+      transition: transform .5s var(--ease);
+    }
+
+    .product-visual-box:hover .product-cat-icon {
+      transform: scale(1.05);
+    }
+
+    .product-avail-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .avail-dot-in { background: #16A34A; box-shadow: 0 0 0 3px rgba(22,163,74,.2); }
+    .avail-dot-order { background: #CA8A04; box-shadow: 0 0 0 3px rgba(202,138,4,.2); }
+
+    .avail-text { font-size: 14px; color: var(--t2); font-weight: 500; }
+
+    .product-tags-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* RIGHT: info */
+    .product-info { display: flex; flex-direction: column; gap: 0; }
+
+    .product-brand-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--black);
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .product-sku {
+      font-size: 12.5px;
+      font-family: 'Courier New', monospace;
+      color: var(--t3);
+      margin-bottom: 20px;
+    }
+
+    .product-short {
+      font-size: 16px;
+      color: var(--t2);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* price block */
+    .price-block {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .price-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 6px;
+    }
+
+    .price-value {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .price-value sup {
+      font-size: 22px;
+      letter-spacing: 0;
+      font-weight: 600;
+      vertical-align: super;
+      margin-right: 4px;
+      color: var(--t2);
+    }
+
+    .price-from {
+      font-size: 13px;
+      color: var(--t3);
+    }
+
+    /* order form */
+    .order-block { display: flex; flex-direction: column; gap: 12px; }
+
+    .order-block .field input:focus { border-color: var(--red); }
+
+    .order-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .order-actions .btn { flex: 1; justify-content: center; }
+
+    .order-note {
+      font-size: 11.5px;
+      color: var(--t3);
+      text-align: center;
+    }
+
+    /* ── SPECS ───────────────────────────── */
+    .specs-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 80px;
+    }
+
+    .specs-sticky {
+      position: sticky;
+      top: 80px;
+    }
+
+    .specs-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 12px;
+    }
+
+    .specs-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .specs-title em { font-style: normal; color: var(--red); }
+
+    .specs-desc {
+      font-size: 14px;
+      color: var(--t2);
+      line-height: 1.6;
+    }
+
+    .specs-table { width: 100%; }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border2);
+      align-items: baseline;
+    }
+
+    .spec-row:first-child { border-top: 1px solid var(--border2); }
+
+    .spec-key {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--t2);
+    }
+
+    .spec-val {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ── RELATED ─────────────────────────── */
+    .related-section { padding: 72px 0; }
+
+    .related-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .related-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--black);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .related-card {
+      background: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .25s var(--ease), transform .25s var(--ease);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .related-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+
+    .related-card-photo {
+      background: var(--surface);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .related-card-photo img {
+      width: 72%; height: 72%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transition: transform .35s var(--ease);
+    }
+
+    .related-card:hover .related-card-photo img { transform: scale(1.07); }
+
+    .related-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+
+    .rc-brand { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--t3); }
+    .rc-name  { font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.25; letter-spacing: -.3px; }
+    .rc-price { font-size: 17px; font-weight: 700; color: var(--black); margin-top: auto; }
+    .rc-from  { font-size: 11px; color: var(--t3); }
+    .rc-avail { font-size: 10px; font-weight: 700; border-radius: 100px; padding: 2px 8px; width: fit-content; }
+
+    /* not found */
+    .not-found {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      padding: 40px;
+    }
+    .not-found h2 { font-size: 28px; font-weight: 700; }
+    .not-found p  { color: var(--t2); font-size: 15px; }
+
+    @media (max-width: 1000px) {
+      .product-head-grid { grid-template-columns: 1fr; gap: 40px; }
+      .product-visual { position: static; }
+      .product-visual-box { max-width: 360px; }
+      .specs-inner { grid-template-columns: 1fr; gap: 32px; }
+      .specs-sticky { position: static; }
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .product-name { font-size: 28px; }
+      .price-value { font-size: 36px; }
+      .spec-row { grid-template-columns: 1fr; gap: 4px; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="TechOpt" class="logo-img"/>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="index.html#order">Условия</a>
+      <a href="index.html#order" class="header-cta btn">Оставить заявку</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-links">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html" class="active">Каталог</a>
+    <a href="index.html#order">Условия</a>
+    <a href="index.html#order" class="header-cta btn">Оставить заявку</a>
+  </div>
+</div>
+
+<!-- PRODUCT PAGE CONTENT (rendered by JS) -->
+<div id="pageContent"></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-copy"><img src="img/logo.png" alt="TechOpt" style="height:24px;border-radius:5px;vertical-align:middle;margin-right:8px;"/> — демонстрационный сайт.</div>
+    <div class="footer-by">Разработано <a href="https://bio33.agency" target="_blank">Bio33 Agency</a></div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Наверх">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <span>Мы используем файлы cookie для улучшения работы сайта. <a href="privacy.html" class="cookie-link">Подробнее</a></span>
+  <div class="cookie-actions">
+    <button class="btn btn-red btn-sm" onclick="acceptCookies()">Принять</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script>
+// ── scroll header ──────────────────────────────────────────────
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+// ── reveal ──────────────────────────────────────────────────────
+function initReveal() {
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+}
+
+// ── category icons & labels ──────────────────────────────────────
+const CAT_ICONS = {
+  smartphones: '📱',
+  laptops:     '💻',
+  tablets:     '📲',
+  accessories: '🎧'
+};
+
+const CAT_LABELS = {
+  smartphones: 'Смартфоны',
+  laptops:     'Ноутбуки',
+  tablets:     'Планшеты',
+  accessories: 'Аксессуары'
+};
+
+// ── form submit ──────────────────────────────────────────────────
+async function submitOrderForm(e, productName) {
+  e.preventDefault();
+  const btn    = document.getElementById('orderBtn');
+  const status = document.getElementById('orderStatus');
+  const orig   = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Отправляем…';
+
+  try {
+    const res = await fetch('/api/send-telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company: document.getElementById('oCompany').value,
+        name:    document.getElementById('oName').value,
+        phone:   document.getElementById('oPhone').value,
+        comment: `Товар: ${productName}. Кол-во: ${document.getElementById('oQty').value}. ${document.getElementById('oComment').value}`,
+        source:  'product-page',
+        _hp:     ''
+      })
+    });
+    if (res.ok) {
+      status.className = 'form-status ok';
+      status.textContent = '✓ Заявка принята. Свяжемся с вами в течение 2 часов.';
+      e.target.reset();
+    } else throw new Error();
+  } catch {
+    status.className = 'form-status err';
+    status.textContent = '✗ Ошибка отправки. Пожалуйста, позвоните нам.';
+    btn.disabled = false;
+    btn.innerHTML = orig;
+  }
+}
+
+// ── render related ───────────────────────────────────────────────
+function renderRelated(current) {
+  const items = PRODUCTS
+    .filter(p => p.cat === current.cat && p.id !== current.id)
+    .slice(0, 4);
+
+  if (!items.length) return '';
+
+  return `
+    <section class="related-section">
+      <div class="wrap">
+        <div class="related-header reveal">
+          <h2 class="related-title">Похожие товары</h2>
+          <a href="catalog.html?cat=${current.cat}" class="btn btn-ghost btn-sm">
+            Все ${CAT_LABELS[current.cat]}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="related-grid reveal" style="transition-delay:.08s">
+          ${items.map(p => `
+            <a href="product.html?id=${p.id}" class="related-card">
+              <div class="related-card-photo">
+                <img src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy"/>
+              </div>
+              <div class="related-card-body">
+                <div class="rc-brand">${p.brand}</div>
+                <div class="rc-name">${p.name}</div>
+                <span class="rc-avail ${p.avail === 'in' ? 'avail-in' : 'avail-order'}">${p.avail === 'in' ? 'В наличии' : 'Под заказ'}</span>
+                <div style="margin-top:auto; padding-top:10px; border-top:1px solid var(--border2)">
+                  <div class="rc-price">₽ ${p.price}</div>
+                  <div class="rc-from">${p.from}</div>
+                </div>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// ── render product ───────────────────────────────────────────────
+function renderProduct(p) {
+  document.title = `${p.brand} ${p.name} — TechOpt`;
+  document.getElementById('pageDesc').content = p.short;
+
+  const specsRows = Object.entries(p.specs).map(([k, v]) => `
+    <div class="spec-row">
+      <div class="spec-key">${k}</div>
+      <div class="spec-val">${v}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('pageContent').innerHTML = `
+
+    <!-- ── PRODUCT HEAD ───────────────────── -->
+    <div class="product-head">
+      <div class="wrap">
+        <div class="breadcrumb">
+          <a href="index.html">Главная</a>
+          <span>›</span>
+          <a href="catalog.html">Каталог</a>
+          <span>›</span>
+          <a href="catalog.html?cat=${p.cat}">${CAT_LABELS[p.cat]}</a>
+          <span>›</span>
+          <span>${p.name}</span>
+        </div>
+
+        <div class="product-head-grid">
+
+          <!-- VISUAL -->
+          <div class="product-visual reveal">
+            <div class="product-visual-box">
+              <img class="product-cat-icon" src="${p.img}" alt="${p.brand} ${p.name}"/>
+            </div>
+            <div class="product-avail-row">
+              <div class="avail-dot ${p.avail === 'in' ? 'avail-dot-in' : 'avail-dot-order'}"></div>
+              <div class="avail-text">${p.avail === 'in' ? 'В наличии — готов к отгрузке' : 'Под заказ — срок уточняется'}</div>
+            </div>
+            ${p.tags?.length ? `<div class="product-tags-row">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+          </div>
+
+          <!-- INFO -->
+          <div class="product-info">
+            <div class="product-brand-label reveal">${p.brand}</div>
+            <h1 class="product-name reveal" style="transition-delay:.06s">${p.name}</h1>
+            <div class="product-sku reveal" style="transition-delay:.1s">Артикул: ${p.sku}</div>
+            <p class="product-short reveal" style="transition-delay:.14s">${p.short}</p>
+
+            <!-- PRICE -->
+            <div class="price-block reveal" style="transition-delay:.18s">
+              <div class="price-label">Оптовая цена</div>
+              <div class="price-value"><sup>₽</sup>${p.price}</div>
+              <div class="price-from">${p.from} · цена без НДС</div>
+            </div>
+
+            <!-- ORDER FORM -->
+            <form class="order-block reveal" id="orderForm" style="transition-delay:.22s" onsubmit="submitOrderForm(event, '${p.brand} ${p.name} (${p.sku})')">
+              <div class="form-row">
+                <div class="field">
+                  <label>Компания</label>
+                  <input type="text" id="oCompany" placeholder="ООО Название" required/>
+                </div>
+                <div class="field">
+                  <label>Контакт</label>
+                  <input type="text" id="oName" placeholder="Иван Иванов" required/>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label>Телефон</label>
+                  <input type="tel" id="oPhone" placeholder="+7 (900) 000-00-00" required/>
+                </div>
+                <div class="field">
+                  <label>Количество, шт</label>
+                  <input type="text" id="oQty" placeholder="Например: 20"/>
+                </div>
+              </div>
+              <div class="field">
+                <label>Комментарий</label>
+                <input type="text" id="oComment" placeholder="Цвет, комплектация, срок поставки…"/>
+              </div>
+              <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off"/>
+              <div class="form-status" id="orderStatus"></div>
+              <label class="privacy-check">
+                <input type="checkbox" required/>
+                Я согласен с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и даю согласие на обработку персональных данных
+              </label>
+              <div class="order-actions">
+                <button type="submit" class="btn btn-red" id="orderBtn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+                  Запросить цену
+                </button>
+                <a href="catalog.html?cat=${p.cat}" class="btn btn-outline">
+                  Другие товары
+                </a>
+              </div>
+              <div class="order-note">Ответ в течение 2 часов в рабочее время</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SPECS ───────────────────────────── -->
+    <section class="specs-section">
+      <div class="wrap">
+        <div class="specs-inner">
+          <div class="specs-sticky">
+            <div class="specs-section-label reveal">Характеристики</div>
+            <h2 class="specs-title reveal" style="transition-delay:.06s">
+              Полные<br/>
+              <em>технические</em><br/>
+              данные
+            </h2>
+            <p class="specs-desc reveal" style="transition-delay:.12s">
+              Все характеристики актуальны для официальной версии, поставляемой на территорию России.
+            </p>
+          </div>
+
+          <div class="specs-table reveal" style="transition-delay:.08s">
+            ${specsRows}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RELATED ─────────────────────────── -->
+    ${renderRelated(p)}
+  `;
+
+  initReveal();
+}
+
+// ── 404 ──────────────────────────────────────────────────────────
+function renderNotFound() {
+  document.getElementById('pageContent').innerHTML = `
+    <div class="not-found">
+      <h2>Товар не найден</h2>
+      <p>Возможно, он был удалён или ссылка устарела.</p>
+      <a href="catalog.html" class="btn btn-red" style="margin-top:8px">Вернуться в каталог</a>
+    </div>
+  `;
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+const id = parseInt(new URLSearchParams(location.search).get('id'));
+const product = PRODUCTS.find(p => p.id === id);
+product ? renderProduct(product) : renderNotFound();
+</script>
+</body>
+</html>
